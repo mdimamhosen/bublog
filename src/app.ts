@@ -12,6 +12,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: 'http://localhost:5000', credentials: true }));
 app.use(cookieParser());
 
+app.get('/', (req: Request, res: Response) => {
+  res.send('Home route...');
+});
+
 app.use('/api', routes);
 
 app.use('/api', (req: Request, res: Response) => {
@@ -22,9 +26,5 @@ app.use('/api', (req: Request, res: Response) => {
 app.use(globalErrorHandler);
 
 app.use(notFound);
-
-app.get('/', (req: Request, res: Response) => {
-  res.send('Home route...');
-});
 
 export default app;
