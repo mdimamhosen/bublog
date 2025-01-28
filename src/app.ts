@@ -27,11 +27,11 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Home route...');
 });
 
-app.get('/api', (req: Request, res: Response) => {
-  res.send('API route...');
-});
+// app.get('/api', (req: Request, res: Response) => {
+//   res.send('API route...');
+// });
 
-app.use('/api', routes);
+// app.use('/api', routes);
 
 // Global error handler
 app.use(globalErrorHandler);
