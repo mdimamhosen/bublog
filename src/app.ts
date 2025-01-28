@@ -11,21 +11,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: ['http://localhost:5000', 'https://bublog-nine.vercel.app/'],
+    origin: '*',
     credentials: true,
   }),
 );
+
 app.use(cookieParser());
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Home route...');
 });
 
-app.use('/api', routes);
-
 app.get('/api', (req: Request, res: Response) => {
   res.send('API route...');
 });
+
+app.use('/api', routes);
 
 // Global error handler
 app.use(globalErrorHandler);
