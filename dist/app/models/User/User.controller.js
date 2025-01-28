@@ -41,12 +41,12 @@ const createUser = (0, catchAsyncResponse_1.default)((req, res) => __awaiter(voi
 const blockUser = (0, catchAsyncResponse_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { userId } = req.params;
     console.log('userId', userId);
-    const result = yield User_service_1.UserServices.blockUser(userId);
+    yield User_service_1.UserServices.blockUser(userId);
     const data = {
         success: true,
         statusCode: http_status_1.default.OK,
         message: 'User blocked successfully',
-        data: result,
+        // data: {},
     };
     (0, sendResponse_1.default)(res, data);
 }));

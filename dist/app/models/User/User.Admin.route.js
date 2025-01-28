@@ -14,5 +14,5 @@ const User_constant_1 = require("./User.constant");
 const router = express_1.default.Router();
 router.post('/auth/create-admin', (0, validateRequest_1.default)(User_validation_1.UserValidation.UserCreateSchemaValidation), User_controller_1.UserController.createAdmin);
 router.patch('/users/:userId/block', (0, auth_1.default)(User_constant_1.USER_ROLE.admin), User_controller_1.UserController.blockUser);
-router.delete('/blogs/:id', (0, auth_1.default)(User_constant_1.USER_ROLE.admin), Blog_controller_1.BlogController.deleteBlog);
+router.delete('/blogs/:id', (0, auth_1.default)(User_constant_1.USER_ROLE.admin), Blog_controller_1.BlogController.deleteBlogByAdmin);
 exports.AdminRoutes = router;

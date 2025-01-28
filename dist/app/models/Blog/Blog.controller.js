@@ -53,6 +53,14 @@ const deleteBlog = (0, catchAsyncResponse_1.default)((req, res) => __awaiter(voi
         statusCode: 200,
     });
 }));
+const deleteBlogByAdmin = (0, catchAsyncResponse_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield Blog_service_1.BlogService.deleteBlog(req.params.id);
+    (0, sendResponse_1.default)(res, {
+        success: true,
+        message: 'Blog deleted successfully',
+        statusCode: 200,
+    });
+}));
 const updateBlog = (0, catchAsyncResponse_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield Blog_service_1.BlogService.updateBlog(req.params.id, req.body);
     (0, sendResponse_1.default)(res, {
@@ -68,4 +76,5 @@ exports.BlogController = {
     deleteBlog,
     getBlogById,
     updateBlog,
+    deleteBlogByAdmin,
 };

@@ -5,6 +5,7 @@ const sendResponse = (res, data) => {
         messsage: data.message,
         success: data.success,
         data: data.data,
+        statusCode: data.statusCode,
     });
 };
 exports.default = sendResponse;

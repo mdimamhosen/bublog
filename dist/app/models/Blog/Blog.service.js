@@ -28,7 +28,7 @@ const CreateBlog = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     }
     const blogId = yield (0, Blog_utils_1.genarateBlogId)();
     payload.id = blogId;
-    const newBlog = yield Blog_model_1.default.create(payload);
+    const newBlog = (yield Blog_model_1.default.create(payload)).populate('author');
     return newBlog;
 });
 const GetAllBlogs = (query) => __awaiter(void 0, void 0, void 0, function* () {
@@ -49,6 +49,10 @@ const GetBlogById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     return blog;
 });
 const deleteBlog = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const isBlogExist = yield Blog_model_1.default.findById(id);
+    if (!isBlogExist) {
+        throw new AppError_1.AppError('Blog not found', http_status_1.default.NOT_FOUND);
+    }
     const result = yield Blog_model_1.default.findByIdAndUpdate(id, { isDeleted: true }, {
         new: true,
     });
@@ -61,7 +65,7 @@ const updateBlog = (id, payload) => __awaiter(void 0, void 0, void 0, function* 
     }
     const updatedBlog = yield Blog_model_1.default.findByIdAndUpdate(id, payload, {
         new: true,
-    });
+    }).populate('author');
     if (!updatedBlog) {
         throw new AppError_1.AppError("Blog can't be updated", http_status_1.default.INTERNAL_SERVER_ERROR);
     }

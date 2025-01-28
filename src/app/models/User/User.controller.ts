@@ -32,13 +32,13 @@ const createUser = catchAsyncResponse(async (req, res) => {
 const blockUser = catchAsyncResponse(async (req, res) => {
   const { userId } = req.params;
   console.log('userId', userId);
-  const result = await UserServices.blockUser(userId);
+  await UserServices.blockUser(userId);
 
   const data = {
     success: true,
     statusCode: httpStatus.OK,
     message: 'User blocked successfully',
-    data: result,
+    // data: {},
   };
 
   sendResponse(res, data);

@@ -18,7 +18,7 @@ const CreateBlog = async (payload: IBlog) => {
 
   payload.id = blogId;
 
-  const newBlog = await Blog.create(payload);
+  const newBlog = (await Blog.create(payload)).populate('author');
 
   return newBlog;
 };
@@ -48,6 +48,11 @@ const GetBlogById = async (id: string) => {
 };
 
 const deleteBlog = async (id: string) => {
+  const isBlogExist = await Blog.findById(id);
+  if (!isBlogExist) {
+    throw new AppError('Blog not found', httpStatus.NOT_FOUND);
+  }
+
   const result = await Blog.findByIdAndUpdate(
     id,
     { isDeleted: true },
@@ -67,7 +72,7 @@ const updateBlog = async (id: string, payload: Partial<IBlog>) => {
 
   const updatedBlog = await Blog.findByIdAndUpdate(id, payload, {
     new: true,
-  });
+  }).populate('author');
   if (!updatedBlog) {
     throw new AppError(
       "Blog can't be updated",
