@@ -18,6 +18,11 @@ app.use(
 
 app.use(cookieParser());
 
+app.use((req: Request, res: Response, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+});
+
 app.get('/', (req: Request, res: Response) => {
   res.send('Home route...');
 });
