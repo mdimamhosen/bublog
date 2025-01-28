@@ -14,6 +14,10 @@ app.use(cookieParser());
 
 app.use('/api', routes);
 
+app.use('/api', (req: Request, res: Response) => {
+  res.send('API route...');
+});
+
 // Global error handler
 app.use(globalErrorHandler);
 
