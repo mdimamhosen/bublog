@@ -34,13 +34,5 @@ const BlogSchema = new mongoose_1.Schema({
 BlogSchema.statics.findNonDeleted = function () {
     return this.find({ isDeleted: false });
 };
-BlogSchema.pre('find', function (next) {
-    this.find({ isDeleted: { $ne: true } });
-    next();
-});
-BlogSchema.pre('findOne', function (next) {
-    this.find({ isDeleted: { $ne: true } });
-    next();
-});
 const Blog = (0, mongoose_1.model)('Blog', BlogSchema);
 exports.default = Blog;
