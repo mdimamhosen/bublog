@@ -6,10 +6,11 @@ import Blog from './Blog.model';
 import { genarateBlogId } from './Blog.utils';
 import QueryBuilder from '../../builder/QueryBuiler';
 import { BlogSearchAbleFields } from './Blog.constant';
+import mongoose from 'mongoose';
 
-const CreateBlog = async (payload: IBlog) => {
+const CreateBlog = async (userID: string, payload: IBlog) => {
   // is the author a valid user?
-  const isAuthorValid = await User.findById(payload.author);
+  const isAuthorValid = await User.findById(userID);
   if (!isAuthorValid) {
     throw new AppError('Author is not valid', httpStatus.NOT_FOUND);
   }
@@ -17,6 +18,7 @@ const CreateBlog = async (payload: IBlog) => {
   const blogId = await genarateBlogId();
 
   payload.id = blogId;
+  payload.author = new mongoose.Types.ObjectId(userID);
 
   const newBlog = (await Blog.create(payload)).populate('author');
 

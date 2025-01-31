@@ -43,16 +43,6 @@ BlogSchema.statics.findNonDeleted = function () {
   return this.find({ isDeleted: false });
 };
 
-BlogSchema.pre('find', function (next) {
-  this.find({ isDeleted: { $ne: true } });
-  next();
-});
-
-BlogSchema.pre('findOne', function (next) {
-  this.find({ isDeleted: { $ne: true } });
-  next();
-});
-
 const Blog = model<IBlog, BlogModel>('Blog', BlogSchema);
 
 export default Blog;

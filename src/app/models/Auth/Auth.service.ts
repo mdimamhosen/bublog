@@ -29,7 +29,9 @@ const loginUser = async (payload: IUserLogin) => {
     throw new AppError('User not found', httpStatus.NOT_FOUND);
   }
   // create token and send to the user
+
   const jwtPayload = {
+    _id: user._id,
     id: user.id,
     role: user.role,
     email: user.email,
