@@ -20,14 +20,16 @@ const Blog_model_1 = __importDefault(require("./Blog.model"));
 const Blog_utils_1 = require("./Blog.utils");
 const QueryBuiler_1 = __importDefault(require("../../builder/QueryBuiler"));
 const Blog_constant_1 = require("./Blog.constant");
-const CreateBlog = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+const mongoose_1 = __importDefault(require("mongoose"));
+const CreateBlog = (userID, payload) => __awaiter(void 0, void 0, void 0, function* () {
     // is the author a valid user?
-    const isAuthorValid = yield User_model_1.User.findById(payload.author);
+    const isAuthorValid = yield User_model_1.User.findById(userID);
     if (!isAuthorValid) {
         throw new AppError_1.AppError('Author is not valid', http_status_1.default.NOT_FOUND);
     }
     const blogId = yield (0, Blog_utils_1.genarateBlogId)();
     payload.id = blogId;
+    payload.author = new mongoose_1.default.Types.ObjectId(userID);
     const newBlog = (yield Blog_model_1.default.create(payload)).populate('author');
     return newBlog;
 });

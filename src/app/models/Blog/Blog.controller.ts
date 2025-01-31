@@ -3,7 +3,9 @@ import sendResponse from '../../utils/sendResponse';
 import { BlogService } from './Blog.service';
 
 const createBlog = catchAsyncResponse(async (req, res) => {
-  const result = await BlogService.CreateBlog(req.body);
+  const user = req.user;
+  // console.log('userID', user?._id);
+  const result = await BlogService.CreateBlog(user?._id, req.body);
 
   sendResponse(res, {
     success: true,
