@@ -33,5 +33,6 @@ const findLastBlogId = () => __awaiter(void 0, void 0, void 0, function* () {
     const lastBlog = yield Blog_model_1.default.findOne({}, { id: 1, _id: 0 })
         .sort({ createdAt: -1 })
         .lean();
+    console.log(yield Blog_model_1.default.findOne({}, { id: 1, _id: 0 }));
     return (lastBlog === null || lastBlog === void 0 ? void 0 : lastBlog.id) ? lastBlog.id.substring(2) : undefined;
 });

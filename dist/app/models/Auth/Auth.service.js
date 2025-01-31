@@ -38,6 +38,7 @@ const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     }
     // create token and send to the user
     const jwtPayload = {
+        _id: user._id,
         id: user.id,
         role: user.role,
         email: user.email,

@@ -6,7 +6,6 @@ const BlogCreationSchemaValidation = zod_1.z.object({
     body: zod_1.z.object({
         title: zod_1.z.string().min(3, 'Title must be at least 3 characters').max(255),
         content: zod_1.z.string().min(10, 'Content must be at least 10 characters'),
-        author: zod_1.z.string(),
         isPublished: zod_1.z.boolean().optional(),
     }),
 });
